@@ -39,16 +39,24 @@ body {
     width: 58px;
     height: 58px;
     color: white;
-    background-color: #32dcd6;
+    background-color:rgba(60, 60, 60, 0.7);
     border: none;
     font-weight: 600;
     margin: 7px;
     font-size: 18px;
-    border-radius: 6px;
+    border-radius: 50%;
 }
 .calcBody .main-calculator .buttons div>div button:hover, .calcBody .main-calculator .buttons div>div button:active, .calcBody .main-calculator .buttons div>div button:focus {
     background-color: #7fa0b1;
 }
-.calcBody .main-calculator .buttons div>div button.clear{
-    background-color: #be1e2c;
+.calcBody .main-calculator .buttons div>div button.btn_right{
+    background-color: rgba(255, 166, 0, 0.8);
+}
+.calcBody .main-calculator .buttons div>div button.btn_top{
+    background-color: rgba(220, 220, 220, 0.5);
+}
+.calcBody .main-calculator .buttons div>div button#zerobtn{
+    width:130px;
+    border-radius: 47%;
+    /* padding:0px; */
 }
