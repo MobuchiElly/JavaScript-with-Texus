@@ -1,9 +1,9 @@
-// Fetch my variables as users trigger input values
+// Variables
 let initialValue = "";
 let secondValue = "";
 let operatorType = "";
 
-// Declaration of input data types 
+// Declaration of input data types in object type 
 const type = {
     numbers: ["0","1","2","3","4","5","6","7","8","9","."],
     operators: ["+", "-", "x", "%", "÷", "+/-"],
@@ -12,40 +12,67 @@ const type = {
 }
 
 // Add Function 
-const add = (var1, var2) => {
+const add = (var1, var2) => 
+{
     let ans = parseFloat(var1) + parseFloat(var2);
     return ans;
 }
 
 // Minus Function 
-const minus = (var1, var2) => {
+const minus = (var1, var2) =>
+{
     let ans = parseFloat(var1) - parseFloat(var2);
     return ans;
 }
 
 // Multiply Function 
-const multiply = (var1, var2) => {
+const multiply = (var1, var2) =>
+{
     let ans = parseFloat(var1) * parseFloat(var2);
     return ans;
 }
 
+// Division Function
+const divide = (var1, var2) =>
+{
+    if (parseFloat(var2) === 0) {
+      return "undefined";
+    }
+    let ans = parseFloat(var1) / parseFloat(var2);
+    return ans;
+};
+
+// Division Function
+const modulus = (var1, var2) =>
+{
+    if (parseFloat(var2) === 0) {
+      return "undefined";
+    }
+    let ans = parseFloat(var1) % parseFloat(var2);
+    return ans;
+};
+
 // Entry Point
-const start = () => {
+const start = () =>
+{
     
     // First call To Screen Function to display 0 as initial calculator value;
     toScreen(0);
 
     // OnClick Calculator Buttons.
-    $(".main-calculator .buttons button").on("click", function () {
+    $(".main-calculator .buttons button").on("click", function ()
+    {
         // Get the value of the clicked button
         let value = $(this).attr("req");
         let toScreenValue = "0";
         
         // LOGIC: Check for the type of the button value if numbers.
-        if (type.numbers.includes(value)) {
+        if (type.numbers.includes(value))
+        {
             
             // Logic for Initial Value 
-            if(operatorType == ""){
+            if(operatorType == "")
+            {
                 if(initialValue.length == 11)
                     return false;
                 if(initialValue == "0")
@@ -56,7 +83,9 @@ const start = () => {
                     toScreenValue = initialValue += ""+value;
             
             // Logic for second Value 
-            } else {
+            }
+            else 
+            {
                 if(secondValue.length == 11)
                     return false;
                 if(secondValue == "0")
@@ -68,37 +97,78 @@ const start = () => {
             }
 
         // LOGIC: Check for the type of the button value if operators.
-        } else if (type.operators.includes(value)) {
+        }
+        else if (type.operators.includes(value))
+        {
 
             if(initialValue == "")
                 initialValue = "0";
             operatorType = ""+value;
             toScreenValue = initialValue;
 
+        // LOGIC: Check for the type of the button value if "+/-".
+        }
+        else if (value === "+/-")
+        {
+
+            if (operatorType === "")
+            {
+                // Toggle the sign of initialValue
+                initialValue = (-(parseFloat(initialValue))).toString();
+                toScreenValue = initialValue;
+            }
+            else
+            {
+                // Toggle the sign of secondValue
+                secondValue = (-(parseFloat(secondValue))).toString();
+                toScreenValue = secondValue;
+            }
+
         // LOGIC: Check for the type of the button value if equals.
-        } else if (type.equals.includes(value)) {
+        }
+        else if (type.equals.includes(value))
+        {
 
             if(initialValue == "" || secondValue == "")
                 return false;
 
-            if(operatorType == "+"){
+            if(operatorType == "+")
+            {
                 let ans = add(initialValue, secondValue);
                 toScreenValue = ans;
             }
-            if(operatorType == "-"){
+            if(operatorType == "-")
+            {
                 let ans = minus(initialValue, secondValue);
                 toScreenValue = ans;
             }
-            if(operatorType == "x"){
+
+            if(operatorType == "÷")
+            {
+                let ans = divide(initialValue, secondValue);
+                toScreenValue = ans;
+            }
+
+            if(operatorType == "x")
+            {
                 let ans = multiply(initialValue, secondValue);
                 toScreenValue = ans;
             }
+
+            if(operatorType == "%")
+            {
+                let ans = modulus(initialValue, secondValue);
+                toScreenValue = ans;
+            }
+
             initialValue = "";
             secondValue = "";
             operatorType = "";
 
         // LOGIC: Check for the type of the button value if clear.
-        } else if (type.clear.includes(value)) {
+        }
+        else if (type.clear.includes(value))
+        {
 
             toScreenValue = "0";
             if(secondValue.length){
@@ -110,15 +180,15 @@ const start = () => {
 
         }
         
-        // After All Logic Send to Screen 
+        // call toScreen function 
         toScreen(toScreenValue);
     })
 
 }
 
-// To Screen Function
-// This function send output to the calculator screen
-const toScreen = (x) => {
+//toScreen function sends output to the calculator display 
+const toScreen = (x) => 
+{
     $(".main-calculator .screen input").val(x);
 }
 
