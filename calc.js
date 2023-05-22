@@ -13,44 +13,30 @@ const type = {
 }
 
 // Add Function 
-const add = (var1, var2) => 
-{
-    let ans = parseFloat(var1) + parseFloat(var2);
-    return ans;
-}
+const add = (var1, var2) => parseFloat(var1) + parseFloat(var2);
 
 // Minus Function 
-const minus = (var1, var2) =>
-{
-    let ans = parseFloat(var1) - parseFloat(var2);
-    return ans;
-}
+const minus = (var1, var2) => parseFloat(var1) - parseFloat(var2);
 
 // Multiply Function 
-const multiply = (var1, var2) =>
-{
-    let ans = parseFloat(var1) * parseFloat(var2);
-    return ans;
-}
+const multiply = (var1, var2) => parseFloat(var1) * parseFloat(var2);
 
 // Division Function
 const divide = (var1, var2) =>
 {
     if (parseFloat(var2) === 0) {
-      return "undefined";
+      return ("undefined");
     }
-    let ans = parseFloat(var1) / parseFloat(var2);
-    return ans;
+    return (parseFloat(var1) / parseFloat(var2));
 };
 
 // Division Function
 const modulus = (var1, var2) =>
 {
     if (parseFloat(var2) === 0) {
-      return "undefined";
+      return ("undefined");
     }
-    let ans = parseFloat(var1) % parseFloat(var2);
-    return ans;
+    return (parseFloat(var1) % parseFloat(var2));
 };
 
 // Entry Point
