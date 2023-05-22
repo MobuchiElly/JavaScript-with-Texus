@@ -6,7 +6,8 @@ let operatorType = "";
 // Declaration of input data types in object type 
 const type = {
     numbers: ["0","1","2","3","4","5","6","7","8","9","."],
-    operators: ["+", "-", "x", "%", "÷", "+/-"],
+    operators: ["+", "-", "x", "%", "÷"],
+    toggleSign: ["+/-"],
     equals: ["="],
     clear: ["c"],
 }
@@ -111,13 +112,13 @@ const start = () =>
         else if (value === "+/-")
         {
 
-            if (operatorType === "")
+            if (initialValue !== "")
             {
                 // Toggle the sign of initialValue
                 initialValue = (-(parseFloat(initialValue))).toString();
                 toScreenValue = initialValue;
             }
-            else
+            else if (secondValue !== "")
             {
                 // Toggle the sign of secondValue
                 secondValue = (-(parseFloat(secondValue))).toString();
@@ -179,8 +180,8 @@ const start = () =>
             operatorType = "";
 
         }
-        
-        // call toScreen function 
+        // secondValue = initialValue;
+        // call toScreen 
         toScreen(toScreenValue);
     })
 
