@@ -5,13 +5,13 @@
 //     inputScreen.innerHTML = "hello";
 // }
 // displayCountdown();
-document.getElementById("input-screen").innerHTML = "hey";
 
-// document.body.style.backgroundColor = "red";
 document.getElementById("btn-1").onclick = function(){
     btn1Redtimer();
     turnLightRed();
 };
+
+document.getElementById("stop-btn").onclick = function() {stopbtn()};
 function btn1Redtimer()
 {
     document.getElementById("input-screen").value='30';
@@ -24,4 +24,9 @@ function turnLightRed()
     {
     y[n].style.backgroundColor = "red";
     }
+}
+
+function stopbtn()
+{
+    document.getElementById("input-screen").value='';
 }
