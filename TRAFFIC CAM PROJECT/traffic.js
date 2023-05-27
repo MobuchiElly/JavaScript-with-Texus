@@ -1,32 +1,141 @@
-// document.querySelector('btn-1')
 
-// function displayCountdown() {
-//     var inputScreen = document.querySelector('input-screen').innerHTML="Hello";
-//     inputScreen.innerHTML = "hello";
-// }
-// displayCountdown();
+// Event handler for btn-1
+document.getElementById("btn-1").addEventListener("click", countDownThirtyO);
 
-document.getElementById("btn-1").onclick = function(){
-    btn1Redtimer();
-    turnLightRed();
-};
+// Event handler for btn-2
+document.getElementById("btn-2").addEventListener("click", countDownFiftyO);
 
-document.getElementById("stop-btn").onclick = function() {stopbtn()};
-function btn1Redtimer()
-{
-    document.getElementById("input-screen").value='30';
-}
-// document.getElementById("btn-1").onclick = 
+// Event HAndler for STOP button
+document.getElementById("stop-btn").addEventListener("click", );
+
+// Variables to control light flow
+var redActive = true;
+var greenActive = true;
+var yellowActive = true;
+
+// Function for redlight
 function turnLightRed()
 {
+    if (redActive)
+    {
     let y = document.getElementsByClassName("light red");
     for (let n = 0; n < y.length; n++)
     {
     y[n].style.backgroundColor = "red";
     }
 }
+}
 
-function stopbtn()
+// FUNCTION TURNS LIGHT GREEN
+function turnLightGreen()
+{
+    if (greenActive)
+    {
+        let y = document.getElementsByClassName("light green");
+        for (let n = 0; n < y.length; n++)
+        {
+            y[n].style.backgroundColor = "green";
+        }
+    }
+}
+
+// FUNCTION TURNS LIGHT YELLOW
+function turnLightYellow()
+{
+    if (yellowActive)
+    {
+        let y = document.getElementsByClassName("light yellow");
+        for (let n = 0; n < y.length; n++)
+        {
+            y[n].style.backgroundColor = "yellow";
+        }
+    }
+}
+
+// Stop button function
+function stopBtn()
 {
     document.getElementById("input-screen").value='';
 }
+
+
+// FUNCTION COUNTS DOWN FROM THIRTY AT 1SECOND PER COUNT
+function countDownThirtyO()
+{
+    let count = 30;
+    if (count >= 26)
+    {redActive = true}
+    else
+    {redActive = false}
+
+
+countDownThirty();
+turnLightRed();
+redActive = true;
+let Interval = setInterval(countDownThirty, 1000);
+function countDownThirty()
+{
+
+  document.getElementById("input-screen").value="Count: " + count;
+  count--;
+  
+  if (count == 26)
+    {
+        
+      countDownEightO();
+      turnLightYellow();
+        
+    }
+}
+}
+
+// FUNCTION COUNTS DOWN TO EIGHT AT 1 SECOND PER COUNT
+function countDownEightO(){
+    let count = 8;
+    turnLightYellow();
+    let Interval = setInterval(countDownEight, 1000);
+    function countDownEight()
+    {
+        document.getElementById("input-screen").value="Count: " + count;
+      count--;
+      
+      if (count == 0)
+        {
+          clearInterval(Interval);
+        }
+    }
+    }
+
+// FUNCTION COUNTS DOWN FROM FIFTY AT 3 SECONDS PER COUNT
+function countDownFiftyO(){
+    let count = 50;
+    countDownFifty();
+    let Interval = setInterval(countDownFifty, 3000);
+    function countDownFifty()
+    {
+        document.getElementById("input-screen").value="Count: " + count;
+      count--;
+      
+      if (count == 0)
+        {
+          clearInterval(Interval);
+        }
+    }
+    }
+
+    // FUNCTION COUNTS DOWN FROM THIRTY AT 3 SECONDS PER COUNT
+function countDownThirtyN(){
+    let count = 30;
+    countDownThirty();
+    let Interval = setInterval(countDownThirty, 3000);
+    function countDownThirty()
+    {
+        document.getElementById("input-screen").value="Count: " + count;
+      count--;
+      
+      if (count == 0)
+        {
+          clearInterval(Interval);
+        }
+    }
+    }

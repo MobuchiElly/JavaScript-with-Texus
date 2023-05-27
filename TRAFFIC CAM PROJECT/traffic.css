@@ -243,5 +243,6 @@ body{
     position:relative;
     bottom:-210px;
     transform: translateX(5%);
+    border-radius: 20px;
     /*I would style the button further */
 }
