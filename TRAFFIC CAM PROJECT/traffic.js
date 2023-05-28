@@ -1,154 +1,165 @@
-// Variables to control light flow
-let redActive = true;
-let greenActive = true;
-let yellowActive = true;
+let interval;
+// Event handler for btn-1
+document.getElementById("btn-1").addEventListener("click", countDownThirtyCall);
+// Event handler for btn-2
+document.getElementById("btn-2").addEventListener("click", countDownFiftyCall);
+// Event HAndler for STOP button
+document.getElementById("stop-btn").addEventListener("click", stopBtn);
+
+// // Stop button function
+function stopBtn()
+{
+    clearInterval(interval);
+    document.getElementById("input-screen").value= "";
+    turnOffLights();
+}
 
 // Function to turn off all lights
-function turnOffLights() {
-    let lights = document.getElementsByClassName("light");
-    for (let i = 0; i < lights.length; i++)
+function turnOffLights()
+{
+    let x = document.getElementsByClassName("light red");
+    for (let n = 0; n < x.length; n++)
     {
-        lights[i].style.backgroundColor = "black";
+      x[n].style.backgroundColor = "black";
+    }
+    let y = document.getElementsByClassName("light yellow");
+    for (let n = 0; n < y.length; n++)
+    {
+      y[n].style.backgroundColor = "black";
+    }
+    let z = document.getElementsByClassName("light green");
+    for (let n = 0; n < z.length; n++)
+    {
+      z[n].style.backgroundColor = "black";
     }
 }
 
-// Function for redlight
-function turnLightRed()
+function turnLightRed(time)
 {
-    if (redActive)
+    let y = document.getElementsByClassName("light red");
+    for (let n = 0; n < y.length; n++)
     {
-        let y = document.getElementsByClassName("light red");
-        for (let n = 0; n < y.length; n++)
-        {
-            y[n].style.backgroundColor = "red";
-        }
+      y[n].style.backgroundColor = "red";
     }
-}
+    // Resets the color after the specified time
+    setTimeout(function()
+    {
+      for (let n = 0; n < y.length; n++)
+      {
+        y[n].style.backgroundColor = "black"; 
+      }
+    }, time);
+  }
+
 
 // FUNCTION TURNS LIGHT GREEN
 function turnLightGreen()
 {
-    if (greenActive)
-    {
         let y = document.getElementsByClassName("light green");
         for (let n = 0; n < y.length; n++)
         {
             y[n].style.backgroundColor = "green";
         }
-    }
 }
 
 // FUNCTION TURNS LIGHT YELLOW
-function turnLightYellow()
-{
-    if (yellowActive)
-    {
+function turnLightYellow(time)
+{ 
         let y = document.getElementsByClassName("light yellow");
         for (let n = 0; n < y.length; n++)
         {
             y[n].style.backgroundColor = "yellow";
         }
-    }
+            // Reset the color after the specified time
+        setTimeout(function()
+        {
+            for (let n = 0; n < y.length; n++)
+            {
+                y[n].style.backgroundColor = "black";
+            }
+        }, time)
 }
 
-// Stop button function
-function stopBtn()
-{
-    clearInterval(interval);
-    document.getElementById("input-screen").value = '';
-    turnOffLights();
-}
 
-
-// FUNCTION COUNTS DOWN FROM THIRTY AT 1SECOND PER COUNT
-function countDownThirtyO()
+// // FUNCTION COUNTS DOWN FROM THIRTY AT 1SECOND PER COUNT
+function countDownThirtyCall()
 {
     let count = 30;
-    if (count >= 26)
-    {redActive = true}
-    else
-    {redActive = false}
-
-
     countDownThirty();
-    turnLightRed();
-    redActive = true;
-    let Interval = setInterval(countDownThirty, 1000);
+    turnLightRed(30000);
+    interval = setInterval(countDownThirty, 1000);
+       // logic is to multiply setInterval time by count then subtract 1000(because 1 count=1000seconds) from it
     function countDownThirty()
     {
         document.getElementById("input-screen").value="Count: " + count;
         count--;
-  
-        if (count == 26)
+      
+        if (count == -1)
         {  
-            countDownEightO();
+                
+            clearInterval(interval); //means 0 would be read
+            countDownEightCall(); //would call this at zero
         }
     }
+    
 }
 
 // FUNCTION COUNTS DOWN TO EIGHT AT 1 SECOND PER COUNT
-function countDownEightO()
+function countDownEightCall()
 {
     let count = 8;
-    turnLightYellow();
-    let Interval = setInterval(countDownEight, 1000);
+    interval = setInterval(countDownEight, 1000);
+    turnLightYellow(9000);
     function countDownEight()
     {
         document.getElementById("input-screen").value="Count: " + count;
         count--;
     
-        redActive = false; 
-        yellowActive = true;
-        turnLightYellow();
-    
-        if (count == 0)
+        if (count == -1)
         {
-            clearInterval(Interval);
+            clearInterval(interval);
+            turnLightGreen();
         }
     }
 }
 
-// FUNCTION COUNTS DOWN FROM FIFTY AT 3 SECONDS PER COUNT
-function countDownFiftyO()
+// // FUNCTION COUNTS DOWN FROM FIFTY AT 3 SECONDS PER COUNT
+function countDownFiftyCall()
 {
     let count = 50;
     countDownFifty();
-    let Interval = setInterval(countDownFifty, 3000);
+    turnLightRed(147000);
+    interval = setInterval(countDownFifty, 3000);
     function countDownFifty()
     {
         document.getElementById("input-screen").value="Count: " + count;
         count--;
 
-        if (count == 0)
+        if (count == -1)
         {
-            clearInterval(Interval);
+            clearInterval(interval);
+            countDwnThirtyCall();
         }
     }
 }
 
-    // FUNCTION COUNTS DOWN FROM THIRTY AT 3 SECONDS PER COUNT
-function countDownThirtyN()
+//     // FUNCTION COUNTS DOWN FROM THIRTY AT 3 SECONDS PER COUNT
+function countDwnThirtyCall()
 {
     let count = 30;
-    countDownThirty();
-    let Interval = setInterval(countDownThirty, 3000);
-    function countDownThirty()
+    turnLightYellow(87000);
+    interval = setInterval(countDwnThirty, 3000);
+    // logic is to multiply setInterval time by count then subtract 3000(because 3 count=3000seconds) from it
+    countDwnThirty();
+    function countDwnThirty()
     {
         document.getElementById("input-screen").value="Count: " + count;
         count--;
     
-        if (count == 0)
+        if (count == -1)
         {
-            clearInterval(Interval);
+            clearInterval(interval);
+            turnLightGreen();
         }
     }
 }
-
-// Event handler for btn-1
-document.getElementById("btn-1").addEventListener("click", countDownThirtyO);
-
-// Event handler for btn-2
-document.getElementById("btn-2").addEventListener("click", countDownFiftyO);
-
-// Event HAndler for STOP button
-document.getElementById("stop-btn").addEventListener("click", stopBtn);
