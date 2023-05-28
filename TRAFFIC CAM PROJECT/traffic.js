@@ -1,29 +1,28 @@
-
-// Event handler for btn-1
-document.getElementById("btn-1").addEventListener("click", countDownThirtyO);
-
-// Event handler for btn-2
-document.getElementById("btn-2").addEventListener("click", countDownFiftyO);
-
-// Event HAndler for STOP button
-document.getElementById("stop-btn").addEventListener("click", );
-
 // Variables to control light flow
-var redActive = true;
-var greenActive = true;
-var yellowActive = true;
+let redActive = true;
+let greenActive = true;
+let yellowActive = true;
+
+// Function to turn off all lights
+function turnOffLights() {
+    let lights = document.getElementsByClassName("light");
+    for (let i = 0; i < lights.length; i++)
+    {
+        lights[i].style.backgroundColor = "black";
+    }
+}
 
 // Function for redlight
 function turnLightRed()
 {
     if (redActive)
     {
-    let y = document.getElementsByClassName("light red");
-    for (let n = 0; n < y.length; n++)
-    {
-    y[n].style.backgroundColor = "red";
+        let y = document.getElementsByClassName("light red");
+        for (let n = 0; n < y.length; n++)
+        {
+            y[n].style.backgroundColor = "red";
+        }
     }
-}
 }
 
 // FUNCTION TURNS LIGHT GREEN
@@ -55,7 +54,9 @@ function turnLightYellow()
 // Stop button function
 function stopBtn()
 {
-    document.getElementById("input-screen").value='';
+    clearInterval(interval);
+    document.getElementById("input-screen").value = '';
+    turnOffLights();
 }
 
 
@@ -69,73 +70,85 @@ function countDownThirtyO()
     {redActive = false}
 
 
-countDownThirty();
-turnLightRed();
-redActive = true;
-let Interval = setInterval(countDownThirty, 1000);
-function countDownThirty()
-{
-
-  document.getElementById("input-screen").value="Count: " + count;
-  count--;
-  
-  if (count == 26)
+    countDownThirty();
+    turnLightRed();
+    redActive = true;
+    let Interval = setInterval(countDownThirty, 1000);
+    function countDownThirty()
     {
-        
-      countDownEightO();
-      turnLightYellow();
-        
+        document.getElementById("input-screen").value="Count: " + count;
+        count--;
+  
+        if (count == 26)
+        {  
+            countDownEightO();
+        }
     }
-}
 }
 
 // FUNCTION COUNTS DOWN TO EIGHT AT 1 SECOND PER COUNT
-function countDownEightO(){
+function countDownEightO()
+{
     let count = 8;
     turnLightYellow();
     let Interval = setInterval(countDownEight, 1000);
     function countDownEight()
     {
         document.getElementById("input-screen").value="Count: " + count;
-      count--;
-      
-      if (count == 0)
+        count--;
+    
+        redActive = false; 
+        yellowActive = true;
+        turnLightYellow();
+    
+        if (count == 0)
         {
-          clearInterval(Interval);
+            clearInterval(Interval);
         }
     }
-    }
+}
 
 // FUNCTION COUNTS DOWN FROM FIFTY AT 3 SECONDS PER COUNT
-function countDownFiftyO(){
+function countDownFiftyO()
+{
     let count = 50;
     countDownFifty();
     let Interval = setInterval(countDownFifty, 3000);
     function countDownFifty()
     {
         document.getElementById("input-screen").value="Count: " + count;
-      count--;
-      
-      if (count == 0)
+        count--;
+
+        if (count == 0)
         {
-          clearInterval(Interval);
+            clearInterval(Interval);
         }
     }
-    }
+}
 
     // FUNCTION COUNTS DOWN FROM THIRTY AT 3 SECONDS PER COUNT
-function countDownThirtyN(){
+function countDownThirtyN()
+{
     let count = 30;
     countDownThirty();
     let Interval = setInterval(countDownThirty, 3000);
     function countDownThirty()
     {
         document.getElementById("input-screen").value="Count: " + count;
-      count--;
-      
-      if (count == 0)
+        count--;
+    
+        if (count == 0)
         {
-          clearInterval(Interval);
+            clearInterval(Interval);
         }
     }
-    }
+}
+
+// Event handler for btn-1
+document.getElementById("btn-1").addEventListener("click", countDownThirtyO);
+
+// Event handler for btn-2
+document.getElementById("btn-2").addEventListener("click", countDownFiftyO);
+
+// Event HAndler for STOP button
+document.getElementById("stop-btn").addEventListener("click", stopBtn);
