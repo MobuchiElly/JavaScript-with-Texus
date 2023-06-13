@@ -1,4 +1,8 @@
-let interval;
+let intervalCountDownThirty;
+let intervalCountDownEight;
+let intervalCountDownFifty;
+let intervalCountDwnThirty;
+
 // Event handler for btn-1
 document.getElementById("btn-1").addEventListener("click", countDownThirtyCall);
 // Event handler for btn-2
@@ -9,7 +13,11 @@ document.getElementById("stop-btn").addEventListener("click", stopBtn);
 // // Stop button function
 function stopBtn()
 {
-    clearInterval(interval);
+    clearInterval(intervalCountDownThirty);
+    clearInterval(intervalCountDownEight);
+    clearInterval(intervalCountDownFifty);
+    clearInterval(intervalCountDwnThirty);
+
     document.getElementById("input-screen").value= "";
     turnOffLights();
 }
@@ -51,7 +59,6 @@ function turnLightRed(time)
     }, time);
   }
 
-
 // FUNCTION TURNS LIGHT GREEN
 function turnLightGreen()
 {
@@ -87,7 +94,7 @@ function countDownThirtyCall()
     let count = 30;
     countDownThirty();
     turnLightRed(30000);
-    interval = setInterval(countDownThirty, 1000);
+    intervalCountDownThirty = setInterval(countDownThirty, 1000);
        // logic is to multiply setInterval time by count then subtract 1000(because 1 count=1000seconds) from it
     function countDownThirty()
     {
@@ -97,18 +104,17 @@ function countDownThirtyCall()
         if (count == -1)
         {  
                 
-            clearInterval(interval); //means 0 would be read
+            clearInterval(intervalCountDownThirty); //means 0 would be read
             countDownEightCall(); //would call this at zero
         }
-    }
-    
+    }   
 }
 
 // FUNCTION COUNTS DOWN TO EIGHT AT 1 SECOND PER COUNT
 function countDownEightCall()
 {
     let count = 8;
-    interval = setInterval(countDownEight, 1000);
+    intervalCountDownEight = setInterval(countDownEight, 1000);
     turnLightYellow(9000);
     function countDownEight()
     {
@@ -117,7 +123,7 @@ function countDownEightCall()
     
         if (count == -1)
         {
-            clearInterval(interval);
+            clearInterval(intervalCountDownEight);
             turnLightGreen();
         }
     }
@@ -129,7 +135,7 @@ function countDownFiftyCall()
     let count = 50;
     countDownFifty();
     turnLightRed(147000);
-    interval = setInterval(countDownFifty, 3000);
+    intervalCountDownFifty = setInterval(countDownFifty, 3000);
     function countDownFifty()
     {
         document.getElementById("input-screen").value="Count: " + count;
@@ -137,7 +143,7 @@ function countDownFiftyCall()
 
         if (count == -1)
         {
-            clearInterval(interval);
+            clearInterval(intervalCountDownFifty);
             countDwnThirtyCall();
         }
     }
@@ -148,7 +154,7 @@ function countDwnThirtyCall()
 {
     let count = 30;
     turnLightYellow(87000);
-    interval = setInterval(countDwnThirty, 3000);
+    intervalCountDwnThirty = setInterval(countDwnThirty, 3000);
     // logic is to multiply setInterval time by count then subtract 3000(because 3 count=3000seconds) from it
     countDwnThirty();
     function countDwnThirty()
@@ -158,7 +164,7 @@ function countDwnThirtyCall()
     
         if (count == -1)
         {
-            clearInterval(interval);
+            clearInterval(intervalCountDwnThirty);
             turnLightGreen();
         }
     }
